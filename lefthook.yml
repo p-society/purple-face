@@ -2,4 +2,8 @@ pre-commit:
   commands:
     biome:
       run: pnpm lint-fix
-      
+
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpx commitlint --edit {1}
