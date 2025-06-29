@@ -14,8 +14,8 @@
     "dev:server": "turbo -F server dev",
     "db:push": "turbo -F server db:push",
     "db:studio": "turbo -F server db:studio",
-    "db:generate": "turbo -F server db:generate",
-    "db:migrate": "turbo -F server db:migrate",
+    "db:generate:migration": "turbo -F server db:generate",
+    "db:apply:migration": "turbo -F server db:migrate",
     "lint-fix": "biome lint --fix",
     "format": "biome format .",
     "check": "biome check ."
