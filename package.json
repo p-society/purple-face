@@ -17,8 +17,9 @@
     "db:generate": "turbo -F server db:generate",
     "db:migrate": "turbo -F server db:migrate"
   },
-  "dependencies": {},
   "devDependencies": {
+    "@arkweid/lefthook": "^0.7.7",
+    "@biomejs/biome": "^2.0.6",
     "turbo": "^2.5.4"
   },
   "packageManager": "pnpm@9.15.4"
