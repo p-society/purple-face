@@ -4,7 +4,7 @@ const TITLE_TEXT = `
 
  `;
 
-export function meta({}: Route.MetaArgs) {
+export function meta(_ : Route.MetaArgs) {
   return [{ title: "My App" }, { name: "description", content: "My App" }];
 }
 

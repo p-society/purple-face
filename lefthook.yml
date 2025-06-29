@@ -1,5 +1,5 @@
 pre-commit:
-  parallel: true
   commands:
     biome:
       run: pnpm lint-fix
+      
