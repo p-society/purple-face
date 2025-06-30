@@ -1,32 +1,32 @@
 {
-	"name": "paps",
-	"private": true,
-	"workspaces": [
-		"apps/*",
-		"packages/*"
-	],
-	"scripts": {
-		"dev": "turbo dev",
-		"build": "turbo build",
-		"check-types": "turbo check-types",
-		"dev:native": "turbo -F native dev",
-		"dev:web": "turbo -F web dev",
-		"dev:server": "turbo -F server dev",
-		"db:push": "turbo -F server db:push",
-		"db:studio": "turbo -F server db:studio",
-		"db:generate": "turbo -F server db:generate",
-		"db:migrate": "turbo -F server db:migrate",
+  "name": "paps",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:native": "turbo -F native dev",
+    "dev:web": "turbo -F web dev",
+    "dev:server": "turbo -F server dev",
+    "db:push": "turbo -F server db:push",
+    "db:studio": "turbo -F server db:studio",
+    "db:generate:migration": "turbo -F server db:generate",
+    "db:apply:migration": "turbo -F server db:migrate",
 		"lint-fix": "biome lint --fix",
 		"format": "biome format .",
 		"type:fix": "biome check . --fix",
 		"check:all": "biome check . --fix && biome lint --fix && biome format ."
-	},
-	"devDependencies": {
-		"@arkweid/lefthook": "^0.7.7",
-		"@biomejs/biome": "^2.0.6",
-		"@commitlint/cli": "^19.8.1",
-		"@commitlint/config-conventional": "^19.8.1",
-		"turbo": "^2.5.4"
-	},
-	"packageManager": "pnpm@9.15.4"
+  },
+  "devDependencies": {
+    "@arkweid/lefthook": "^0.7.7",
+    "@biomejs/biome": "^2.0.6",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "turbo": "^2.5.4"
+  },
+  "packageManager": "pnpm@9.15.4"
 }
