@@ -1,11 +1,12 @@
 import type { Route } from "./+types/_index";
 
 const TITLE_TEXT = `
-
+DASHBOARD
+========
  `;
 
 export function meta(_: Route.MetaArgs) {
-	return [{ title: "My App" }, { name: "description", content: "My App" }];
+	return [{ title: "PSOC" }, { name: "description", content: "My App" }];
 }
 
 export default function Dashboard() {
