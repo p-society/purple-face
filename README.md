@@ -1,9 +1,9 @@
-# purple-face
-We are excited to announce our project *purple-face*.
+# IIITBuzz
+We are excited to announce our project *IIITBuzz*.
 Have you ever felt a need for random discussions with unknown college mates over some obscure topic you like? or have you ever felt a need for a platform to connect with your batch when you're on vacation back home?
 Or maybe somewhere you can ask for advice without the need to socialise? If so, then we have something great for you in store...
 
-Introducing purple-face*(name yet not finalised, open to suggestions) a community forum create by you and for you! More on this later.
+Introducing IIITBuzz
 
 This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines React, React Router, Fastify, and more.
 
@@ -70,4 +70,3 @@ paps/
 - `pnpm db:studio`: Open database studio UI
 ## License
 This project is licensed under the [GNU General Public License v3.0](LICENSE).
-
