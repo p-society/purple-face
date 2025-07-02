@@ -1,7 +1,7 @@
 import type { Route } from "./+types/_index";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 /**
  * TITLE_TEXT is an ASCII art banner displayed at the top of the home page.
@@ -23,6 +23,22 @@ $$/              $$$$$$/         $$$$$$/         $$$$$$/
                                 
 `;
 
+// Feature list for landing page cards
+const features = [
+	{ icon: "💬", title: "Discussion Boards", description: "Engage in topic-based discussions with your peers." },
+	{ icon: "❓", title: "Q&A Sections", description: "Ask questions and get answers from the community." },
+	{ icon: "📅", title: "Event Announcements", description: "Stay updated with the latest campus events and activities." },
+	{ icon: "📚", title: "Study Resources", description: "Access and share notes, guides, and helpful materials." },
+];
+
+// Footer links for the landing page
+const footerLinks = [
+	{ to: "/about", label: "About" },
+	{ to: "/contact", label: "Contact" },
+	{ to: "/privacy", label: "Privacy Policy" },
+	{ to: "/terms", label: "Terms of Service" },
+];
+
 export function meta(_: Route.MetaArgs) {
 	return [
 		{ title: "IIITBuzz - Community Forum" },
@@ -39,38 +55,16 @@ export default function LandingPage() {
 					A vibrant community forum for IIIT students. Connect, discuss, learn, and grow together!
 				</p>
 				<div className="grid gap-4 md:grid-cols-2 max-w-2xl w-full mx-auto mb-6">
-					<Card>
-						<CardHeader>
-							<CardTitle>💬 Discussion Boards</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<CardDescription>Engage in topic-based discussions with your peers.</CardDescription>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>❓ Q&amp;A Sections</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<CardDescription>Ask questions and get answers from the community.</CardDescription>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>📅 Event Announcements</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<CardDescription>Stay updated with the latest campus events and activities.</CardDescription>
-						</CardContent>
-					</Card>
-					<Card>
-						<CardHeader>
-							<CardTitle>📚 Study Resources</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<CardDescription>Access and share notes, guides, and helpful materials.</CardDescription>
-						</CardContent>
-					</Card>
+					{features.map((feature) => (
+						<Card key={feature.title}>
+							<CardHeader>
+								<CardTitle>{`${feature.icon} ${feature.title}`}</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<CardDescription>{feature.description}</CardDescription>
+							</CardContent>
+						</Card>
+					))}
 				</div>
 				<div className="flex flex-col sm:flex-row gap-4 justify-center">
 					<Link to="/signup">
@@ -83,10 +77,11 @@ export default function LandingPage() {
 			</section>
 			<footer className="w-full border-t py-4 text-center text-sm text-muted-foreground bg-background">
 				<nav className="flex flex-wrap justify-center gap-4 mb-2">
-					<Link to="/about" className="hover:underline">About</Link>
-					<Link to="/contact" className="hover:underline">Contact</Link>
-					<Link to="/privacy" className="hover:underline">Privacy Policy</Link>
-					<Link to="/terms" className="hover:underline">Terms of Service</Link>
+					{footerLinks.map((link) => (
+						<Link key={link.to} to={link.to} className="hover:underline">
+							{link.label}
+						</Link>
+					))}
 				</nav>
 				<span>&copy; {new Date().getFullYear()} IIITBuzz. All rights reserved.</span>
 			</footer>
