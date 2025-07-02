@@ -1,5 +1,5 @@
 {
-	"name": "IIITBuzz",
+	"name": "iiitbuzz",
 	"private": true,
 	"workspaces": [
 		"apps/*",
