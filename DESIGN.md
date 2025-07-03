@@ -56,7 +56,7 @@ This document serves as the guidelines for UI design, components, theming.
 - **Chunky elements** with **4px to 8px borders**.
 - Consistent **block shadows** in neobrutalist style.
 - **Pixel-line dividers** and **dotted pixel grid patterns** for subtle structure.
-- Use UI components from [neobrutalism library](https://neobrutalism.dev)
+- Use UI components inspired by the [neobrutalism library](https://neobrutalism.dev), or use a React-compatible library that follows this style.
 
 ---
 
@@ -115,9 +115,9 @@ This document serves as the guidelines for UI design, components, theming.
 
 ## 📁 Assets
 
-- ![IIITBuzz Logo](/assets/logo.png)  
-- ![UI Overview](/assets/overview.png)
-- ![Other UI discussed](/assets/ui-overview.png)
+- ![IIITBuzz Logo](assets/logo.png)  
+- ![Homepage Overview](assets/overview.png)
+- ![Other UIs discussed](assets/other-ui.png)
 
 ---
 
