@@ -1,5 +1,6 @@
 import type { Route } from "./+types/_index";
-
+//just a placeholder for the route type, adjust as necessary
+//testing for jenkins
 const TITLE_TEXT = `
 
 ░▒▓███████▓▒░        ░▒▓███████▓▒░       ░▒▓██████▓▒░        ░▒▓██████▓▒░  
