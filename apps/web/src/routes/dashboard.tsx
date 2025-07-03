@@ -1,6 +1,5 @@
 import type { Route } from "./+types/_index";
 
-//adding it as a change for jenkins to recognize this file
 const TITLE_TEXT = `
 
 ░▒▓███████▓▒░        ░▒▓███████▓▒░       ░▒▓██████▓▒░        ░▒▓██████▓▒░  
