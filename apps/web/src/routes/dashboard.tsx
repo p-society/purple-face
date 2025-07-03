@@ -1,5 +1,6 @@
 import type { Route } from "./+types/_index";
 
+// jenkins-checks
 const TITLE_TEXT = `
 
 ░▒▓███████▓▒░        ░▒▓███████▓▒░       ░▒▓██████▓▒░        ░▒▓██████▓▒░  
