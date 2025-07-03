@@ -1,32 +1,23 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:20-alpine' 
-            args '-u root'        
-        }
-    }
+    agent any
 
     stages {
-        stage('Install pnpm') {
+        stage('Setup Node') {
             steps {
+                sh 'curl -fsSL https://deb.nodesource.com/setup_20.x | bash -'
+                sh 'apt-get install -y nodejs'
                 sh 'npm install -g pnpm@9.15.4'
             }
         }
-        stage('Install dependencies') {
+        stage('Install deps') {
             steps {
                 sh 'pnpm install'
             }
         }
-        stage('Lint, Format, and Type Check') {
+        stage('Lint/Typecheck') {
             steps {
                 sh 'pnpm check:all'
             }
-        }
-    }
-
-    post {
-        always {
-            archiveArtifacts artifacts: '**/biome-report.*', allowEmptyArchive: true
         }
     }
 }
