@@ -2,7 +2,6 @@ import type { Route } from "./+types/_index";
 
 /**
  * TITLE_TEXT is an ASCII art banner displayed at the top of the home page.
- * It visually represents the application's branding in a stylized format.
  */
 const TITLE_TEXT = `
 
