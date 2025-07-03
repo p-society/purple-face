@@ -2,6 +2,12 @@ pipeline {
     agent any
 
     stages {
+        stage('Install pnpm') {
+            steps {
+                sh 'corepack enable'
+                sh 'corepack prepare pnpm@9.15.4 --activate'
+            }
+        }
         stage('Install dependencies') {
             steps {
                 sh 'pnpm install'
