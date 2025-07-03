@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:20-alpine' 
+            args '-u root'        
+        }
+    }
 
     stages {
         stage('Install pnpm') {
