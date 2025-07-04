@@ -9,9 +9,9 @@
 @tailwind utilities;
 
 :root {
-  --primary: #040403; /* Yellow */
-  --secondary: #00ff04; /* Green */
-  --accent: #f87171; /* Red */
+  --primary: #040403; 
+  --secondary: #00ff04; 
+  --accent: #f87171;
   --background: #ffffff;
   --foreground: #e6be30;
   --border: #000000;
@@ -91,5 +91,5 @@
   --sidebar-border: #9333ea;
   --sidebar-ring: #9333ea;
   --title-shadow: #1b150f;
-} */
+} 
 
