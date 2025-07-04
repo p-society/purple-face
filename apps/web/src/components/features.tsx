@@ -33,22 +33,6 @@ const FeaturesPage = () => {
       color: "border-destructive-custom",
       
       link: "/resources"
-    },
-    {
-      icon: "🤝",
-      title: "Collaboration Hub",
-      description: "Find project partners, form study groups, and collaborate on academic endeavors.",
-      color: "border-primary-custom",
-     
-      link: "/collaboration"
-    },
-    {
-      icon: "🏆",
-      title: "Achievement Showcase",
-      description: "Celebrate your wins, share achievements, and inspire fellow students.",
-      color: "border-secondary-custom",
-     
-      link: "/achievements"
     }
   ];
 
@@ -66,7 +50,7 @@ const FeaturesPage = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {featuresPage.map((feature, index) => (
             <Link key={index} to={feature.link}>
               <Card className={`neo-brutal-card ${feature.color} hover:scale-105 transition-transform duration-200 ghibli-feature-card relative overflow-hidden cursor-pointer`} style={{ animationDelay: `${index * 0.2}s` }}>

@@ -1,3 +1,4 @@
+import { Mail, Twitter, Smartphone } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -15,13 +16,13 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <div className="w-8 h-8 neo-brutal-card bg-primary/20 border-primary flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
-                <span className="text-primary text-xs">📧</span>
+                <Mail className="text-primary w-4 h-4" />
               </div>
               <div className="w-8 h-8 neo-brutal-card bg-secondary/20 border-secondary flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
-                <span className="text-secondary text-xs">🐦</span>
+                <Twitter className="text-secondary w-4 h-4" />
               </div>
               <div className="w-8 h-8 neo-brutal-card bg-accent/20 border-accent flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
-                <span className="text-accent text-xs">📱</span>
+                <Smartphone className="text-accent w-4 h-4" />
               </div>
             </div>
           </div>
