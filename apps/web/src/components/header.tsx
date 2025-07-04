@@ -1,32 +1,19 @@
-import { NavLink } from "react-router";
-
 import { ModeToggle } from "./mode-toggle";
 
 export default function Header() {
-	const links = [{ to: "/", label: "Home" }];
-
-	return (
-		<div>
-			<div className="flex flex-row items-center justify-between px-2 py-1">
-				<nav className="flex gap-4 text-lg">
-					{links.map(({ to, label }) => {
-						return (
-							<NavLink
-								key={to}
-								to={to}
-								className={({ isActive }) => (isActive ? "font-bold" : "")}
-								end
-							>
-								{label}
-							</NavLink>
-						);
-					})}
-				</nav>
-				<div className="flex items-center gap-2">
-					<ModeToggle />
-				</div>
-			</div>
-			<hr />
-		</div>
-	);
+    return (
+        <header className="flex items-center justify-between px-6 py-4 border-b-4"
+            style={{ background: "var(--surface)", borderColor: "var(--border)" }}>
+            <div className="flex items-center gap-3">
+                <img src="/logo.svg" alt="IIITBuzz Logo" className="h-10 w-10" />
+                <span className="text-2xl md:text-3xl font-extrabold tracking-tight pixel-font drop-shadow-pixel"
+                    style={{ color: "var(--primary)" }}>
+                    IIITBuzz
+                </span>
+            </div>
+            <div className="flex items-center gap-4">
+                <ModeToggle />
+            </div>
+        </header>
+    );
 }
