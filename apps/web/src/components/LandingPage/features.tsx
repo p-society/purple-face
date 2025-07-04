@@ -6,7 +6,7 @@ const FeaturesPage = () => {
       icon: "💬",
       title: "Discussion Boards",
       description: "Engage in meaningful conversations about academics, projects, and campus life with your peers.",
-      color: "border-primary-custom",
+      color: "border-foreground",
       
       link: "/discussion"
     },
@@ -14,7 +14,7 @@ const FeaturesPage = () => {
       icon: "❓",
       title: "Q&A Sections",
       description: "Get quick answers to your questions from seniors, peers, and subject experts.",
-      color: "border-secondary-custom",
+      color: "border-secondary",
       
       link: "/qna"
     },
@@ -22,7 +22,7 @@ const FeaturesPage = () => {
       icon: "📅",
       title: "Event Announcements",
       description: "Stay updated with the latest campus events, workshops, and important announcements.",
-      color: "border-accent-custom",
+      color: "border-accent",
       
       link: "/events"
     },
@@ -30,7 +30,7 @@ const FeaturesPage = () => {
       icon: "📚",
       title: "Study Resources",
       description: "Access shared notes, previous year papers, and study materials contributed by the community.",
-      color: "border-destructive-custom",
+      color: "border-destructive",
       
       link: "/resources"
     }
@@ -61,10 +61,10 @@ const FeaturesPage = () => {
                   <div className="text-4xl mb-4 avatar-float" style={{ animationDelay: `${index * 0.1}s` }}>
                     {feature.icon}
                   </div>
-                  <CardTitle className="pixel-font text-lg">{feature.title}</CardTitle>
+                  <CardTitle className="pixel-font text-foreground text-lg">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-grey-400 text-center">
+                  <p className="text-sm text-muted-foreground text-center">
                     {feature.description}
                   </p>
                 </CardContent>

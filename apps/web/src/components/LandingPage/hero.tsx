@@ -42,9 +42,13 @@ const Hero = () => {
             </div>
           </div>
 
-          <h1 className="pixel-font text-4xl md:text-6xl lg:text-7xl mb-6 glitch-text text-primary ghibli-title" data-text="WELCOME TO IIITBuzz">
-            WELCOME TO IIITBuzz
+          <h1 className="pixel-font text-4xl md:text-6xl lg:text-7xl mb-6 glitch-text font-bold text-primary ghibli-title" data-text="IIITBuzz">
+            IIITBuzz
           </h1>
+
+          <p className="text-2xl md:text-3xl  mb-8 text-primary font-bold ghibli-title ">
+            CONNECT • LEARN • WIN • REPEAT
+          </p>
 
           <div className="neo-brutal-card p-8 mb-8 max-w-2xl mx-auto ghibli-card ">
             <p className="text-lg md:text-xl mb-4 text-foreground para-text-font">
@@ -57,18 +61,18 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 fade-in-up">
-            <Button size="lg" className="neo-brutal-button bg-primary text-black hover:bg-primary/90 border-primary text-lg px-8 py-6 ghibli-button">
+            <Button size="lg" className="neo-brutal-button bg-foreground text-black hover:bg-primary/90 border-primary text-lg px-8 py-6 ghibli-button">
               🚀 JOIN THE BUZZ
             </Button>
-            <Button size="lg" variant="outline" className="neo-brutal-button border-secondary text-secondary hover:bg-secondary hover:text-black text-lg px-8 py-6 ghibli-button">
+            <Button size="lg" variant="outline" className="neo-brutal-button bg-secondary border-primary text-primary hover:bg-secondary  hover:text-black text-lg px-8 py-6 ghibli-button">
               📖 EXPLORE FIRST
             </Button>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto fade-in-up">
-            <div className="neo-brutal-card p-4 bg-primary-20 border-primary ghibli-feature-card">
+            <div className="neo-brutal-card p-4 bg-primary-20 border-foreground ghibli-feature-card">
               <div className="text-2xl mb-2">💬</div>
-              <div className="pixel-font text-xs text-primary">DISCUSSIONS</div>
+              <div className="pixel-font text-xs text-foreground">DISCUSSIONS</div>
             </div>
             <div className="neo-brutal-card p-4 bg-secondary-20 border-secondary ghibli-feature-card" style={{ animationDelay: '0.2s' }}>
               <div className="text-2xl mb-2">❓</div>

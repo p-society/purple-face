@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link, NavLink } from "react-router";
-import { ModeToggle } from "./mode-toggle";
+import { ModeToggle } from "../mode-toggle";
 
 const Header = () => {
   return (
@@ -38,12 +38,12 @@ const Header = () => {
         <div className="flex items-center space-x-3">
           <ModeToggle />
           <Link to="/login">
-            <Button variant="outline" className="neo-brutal-button border-secondary text-secondary hover:bg-secondary hover:text-black">
+            <Button variant="outline" className="neo-brutal-button border-primary text-primary bg-secondary hover:bg-secondary hover:text-black">
               Log In
             </Button>
           </Link>
           <Link to="/signup">
-            <Button className="neo-brutal-button bg-primary text-black hover:bg-primary/90 border-primary">
+            <Button className="neo-brutal-button bg-foreground text-primary hover:bg-primary/90 border-foreground">
               Sign Up
             </Button>
           </Link>
