@@ -15,8 +15,8 @@ const Header = () => {
         
         <nav className="hidden md:flex items-center space-x-6 text-lg">
           <a href="#features" className="text-foreground hover:text-primary transition-colors">Features</a>
-          <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
-          <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
+          <a href="#hero" className="text-foreground hover:text-primary transition-colors">About</a>
+          <a href="#footer" className="text-foreground hover:text-primary transition-colors">Contact</a>
           
           {/* 
           {[
@@ -31,7 +31,7 @@ const Header = () => {
               {label}
             </NavLink>
           ))} 
-          */}
+          */} 
         </nav>
 
         

@@ -42,15 +42,15 @@ const Hero = () => {
             </div>
           </div>
 
-          <h1 className="pixel-font text-4xl md:text-6xl lg:text-7xl mb-6 glitch-text text-primary ghibli-title " data-text="WELCOME TO IIITBuzz">
+          <h1 className="pixel-font text-4xl md:text-6xl lg:text-7xl mb-6 glitch-text text-primary ghibli-title" data-text="WELCOME TO IIITBuzz">
             WELCOME TO IIITBuzz
           </h1>
 
           <div className="neo-brutal-card p-8 mb-8 max-w-2xl mx-auto ghibli-card ">
-            <p className="text-lg md:text-xl mb-4 text-foreground">
+            <p className="text-lg md:text-xl mb-4 text-foreground para-text-font">
               🎓 The ultimate community forum for IIIT students!
             </p>
-            <p className="text-muted-foreground ">
+            <p className="text-muted-foreground para-text-font">
               Connect, collaborate, and conquer your academic journey with fellow IIITians.
               Your digital campus hub for discussions, resources, and everything in between.
             </p>
