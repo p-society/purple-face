@@ -42,8 +42,13 @@ const Hero = () => {
             </div>
           </div>
 
+<<<<<<< HEAD:apps/web/src/components/LandingPage/hero.tsx
           <h1 className="pixel-font text-4xl md:text-6xl lg:text-7xl mb-6 glitch-text font-bold text-primary ghibli-title" data-text="IIITBuzz">
             IIITBuzz
+=======
+          <h1 className="pixel-font text-4xl md:text-6xl lg:text-7xl mb-6 glitch-text text-primary ghibli-title" data-text="WELCOME TO IIITBuzz">
+            WELCOME TO IIITBuzz
+>>>>>>> c80714c (Added: Light & Dark themes):apps/web/src/components/hero.tsx
           </h1>
 
           <p className="text-2xl md:text-3xl  mb-8 text-primary font-bold ghibli-title ">
