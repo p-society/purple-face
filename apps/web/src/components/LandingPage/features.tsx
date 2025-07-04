@@ -6,7 +6,7 @@ const FeaturesPage = () => {
       icon: "💬",
       title: "Discussion Boards",
       description: "Engage in meaningful conversations about academics, projects, and campus life with your peers.",
-      color: "border-primary-custom",
+      color: "border-foreground",
       
       link: "/discussion"
     },
@@ -14,7 +14,7 @@ const FeaturesPage = () => {
       icon: "❓",
       title: "Q&A Sections",
       description: "Get quick answers to your questions from seniors, peers, and subject experts.",
-      color: "border-secondary-custom",
+      color: "border-secondary",
       
       link: "/qna"
     },
@@ -22,7 +22,7 @@ const FeaturesPage = () => {
       icon: "📅",
       title: "Event Announcements",
       description: "Stay updated with the latest campus events, workshops, and important announcements.",
-      color: "border-accent-custom",
+      color: "border-accent",
       
       link: "/events"
     },
@@ -30,25 +30,9 @@ const FeaturesPage = () => {
       icon: "📚",
       title: "Study Resources",
       description: "Access shared notes, previous year papers, and study materials contributed by the community.",
-      color: "border-destructive-custom",
+      color: "border-destructive",
       
       link: "/resources"
-    },
-    {
-      icon: "🤝",
-      title: "Collaboration Hub",
-      description: "Find project partners, form study groups, and collaborate on academic endeavors.",
-      color: "border-primary-custom",
-     
-      link: "/collaboration"
-    },
-    {
-      icon: "🏆",
-      title: "Achievement Showcase",
-      description: "Celebrate your wins, share achievements, and inspire fellow students.",
-      color: "border-secondary-custom",
-     
-      link: "/achievements"
     }
   ];
 
@@ -66,7 +50,7 @@ const FeaturesPage = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {featuresPage.map((feature, index) => (
             <Link key={index} to={feature.link}>
               <Card className={`neo-brutal-card ${feature.color} hover:scale-105 transition-transform duration-200 ghibli-feature-card relative overflow-hidden cursor-pointer`} style={{ animationDelay: `${index * 0.2}s` }}>
@@ -77,10 +61,10 @@ const FeaturesPage = () => {
                   <div className="text-4xl mb-4 avatar-float" style={{ animationDelay: `${index * 0.1}s` }}>
                     {feature.icon}
                   </div>
-                  <CardTitle className="pixel-font text-lg">{feature.title}</CardTitle>
+                  <CardTitle className="pixel-font text-foreground text-lg">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-grey-400 text-center">
+                  <p className="text-sm text-muted-foreground text-center">
                     {feature.description}
                   </p>
                 </CardContent>
