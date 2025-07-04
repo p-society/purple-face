@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Menu, X } from "lucide-react"; // Lucide icons for hamburger
+
 function useThemePalette() {
     useEffect(() => {
         function setPalette(theme: "light" | "dark") {
@@ -40,19 +42,9 @@ function useThemePalette() {
         return () => observer.disconnect();
     }, []);
 }
-
-export function meta() {
-    return [
-        { title: "IIITBuzz - Community Forum for IIIT Students" },
-        {
-            name: "description",
-            content: "IIITBuzz is a vibrant community forum for IIIT students. Join discussions, ask questions, find events, and access study resources.",
-        },
-    ];
-}
-
 export default function Home() {
     useThemePalette();
+    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [randomPost, setRandomPost] = useState<{
         username: string;
         title: string;
@@ -68,9 +60,13 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="min-h-screen flex flex-col font-sans" style={{ background: "var(--bg)", color: "var(--text-primary)" }}>
-
+        <div
+            className="min-h-screen flex flex-col font-sans relative"
+            style={{ background: "var(--bg)", color: "var(--text-primary)" }}
+        >
+            {/* BODY */}
             <div className="flex flex-1 w-full min-h-0">
+                {/* DESKTOP SIDEBAR */}
                 <nav
                     className="hidden md:flex flex-col gap-2 border-r-4 py-8 px-4 min-w-max h-auto"
                     aria-label="Main Navigation"
@@ -87,6 +83,8 @@ export default function Home() {
                     <SidebarItem icon="🏆" label="Leaderboard" />
                     <SidebarItem icon="ℹ️" label="About" />
                 </nav>
+
+                {/* MAIN CONTENT */}
                 <main className="flex-1 flex flex-col items-center px-2 py-8" aria-label="Main Content">
                     <section className="w-full flex flex-col items-center space-y-8">
                         <article
