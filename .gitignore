@@ -1,3 +1,4 @@
 node_modules
 .turbo
 Docker
+.DS_Store
