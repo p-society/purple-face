@@ -8,10 +8,9 @@ import {
 } from "react-router";
 import type { Route } from "./+types/root";
 import "./index.css";
-import "../assets/landingpage.css"
+import "./assets/landingpage.css";
 import { ThemeProvider } from "./components/theme-provider";
 import { Toaster } from "./components/ui/sonner";
-
 
 export const links: Route.LinksFunction = () => [
 	{
@@ -51,9 +50,7 @@ export default function App() {
 	return (
 		<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
 			<div className="flex flex-col min-h-screen">
-				
 				<Outlet />
-				
 			</div>
 			<Toaster richColors />
 		</ThemeProvider>
