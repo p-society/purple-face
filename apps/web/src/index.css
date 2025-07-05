@@ -133,3 +133,27 @@ body {
 		@apply bg-background text-foreground;
 	}
 }
+
+:root {
+  --bg: #fce9d6;
+  --surface: #fffdfb;
+  --primary: #62d8e2;
+  --accent: #f4be52;
+  --secondary: #f18e5d;
+  --badge: #f8b3c8;
+  --border: #888888;
+  --text-primary: #2d2d2d;
+  --text-secondary: #5a5a5a;
+}
+
+.dark {
+  --bg: #141420;
+  --surface: #1c1c2a;
+  --primary: #62d8e2;
+  --accent: #e870a7;
+  --secondary: #f18e5d;
+  --badge: #bca4e2;
+  --border: #3c3c4a;
+  --text-primary: #f5f5f5;
+  --text-secondary: #aaaaaa;
+}
