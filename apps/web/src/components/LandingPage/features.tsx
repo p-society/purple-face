@@ -2,40 +2,39 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FeaturesPage = () => {
 	const featuresPage = [
-	{
-		key: "discussion-boards",
-		icon: "💬",
-		title: "Discussion Boards",
-		description:
-			"Engage in meaningful conversations about academics, projects, and campus life with your peers.",
-		color: "border-foreground",
-	},
-	{
-		key: "qa-sections",
-		icon: "❓",
-		title: "Q&A Sections",
-		description:
-			"Get quick answers to your questions from seniors, peers, and subject experts.",
-		color: "border-secondary",
-	},
-	{
-		key: "event-announcements",
-		icon: "📅",
-		title: "Event Announcements",
-		description:
-			"Stay updated with the latest campus events, workshops, and important announcements.",
-		color: "border-accent",
-	},
-	{
-		key: "study-resources",
-		icon: "📚",
-		title: "Study Resources",
-		description:
-			"Access shared notes, previous year papers, and study materials contributed by the community.",
-		color: "border-destructive",
-	},
-];
-
+		{
+			key: "discussion-boards",
+			icon: "💬",
+			title: "Discussion Boards",
+			description:
+				"Engage in meaningful conversations about academics, projects, and campus life with your peers.",
+			color: "border-foreground",
+		},
+		{
+			key: "qa-sections",
+			icon: "❓",
+			title: "Q&A Sections",
+			description:
+				"Get quick answers to your questions from seniors, peers, and subject experts.",
+			color: "border-secondary",
+		},
+		{
+			key: "event-announcements",
+			icon: "📅",
+			title: "Event Announcements",
+			description:
+				"Stay updated with the latest campus events, workshops, and important announcements.",
+			color: "border-accent",
+		},
+		{
+			key: "study-resources",
+			icon: "📚",
+			title: "Study Resources",
+			description:
+				"Access shared notes, previous year papers, and study materials contributed by the community.",
+			color: "border-destructive",
+		},
+	];
 
 	return (
 		<section
@@ -56,10 +55,10 @@ const FeaturesPage = () => {
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
 					{featuresPage.map((feature, index) => (
 						<Card
-	         		key={feature.key} // ✅ Add key here
-	         		className={`neo-brutal-card ${feature.color} hover:scale-105 transition-transform duration-200 ghibli-feature-card relative overflow-hidden cursor-pointer`}
-	         		style={{ animationDelay: `${index * 0.2}s` }}
-	         	>
+							key={feature.key} // ✅ Add key here
+							className={`neo-brutal-card ${feature.color} hover:scale-105 transition-transform duration-200 ghibli-feature-card relative overflow-hidden cursor-pointer`}
+							style={{ animationDelay: `${index * 0.2}s` }}
+						>
 							<CardHeader className="text-center">
 								<div
 									className="text-4xl mb-4 avatar-float"
