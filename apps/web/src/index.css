@@ -144,6 +144,7 @@ body {
 	--border: #888888;
 	--text-primary: #2d2d2d;
 	--text-secondary: #5a5a5a;
+	--background-image: url('/backgrounds/bg-light.png');
 }
 
 .dark {
@@ -156,4 +157,5 @@ body {
 	--border: #3c3c4a;
 	--text-primary: #f5f5f5;
 	--text-secondary: #aaaaaa;
+	--background-image: url('/backgrounds/bg-dark.png');
 }

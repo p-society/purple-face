@@ -22,8 +22,14 @@ export default function Home() {
 
 	return (
 		<div
-			className="flex flex-col min-h-screen font-sans"
-			style={{ background: "var(--bg)", color: "var(--text-primary)" }}
+			className="min-h-screen flex flex-col font-sans relative"
+			style={{
+				backgroundImage: "var(--background-image)",
+				backgroundSize: "cover",
+				backgroundPosition: "center",
+				backgroundRepeat: "no-repeat",
+				backgroundAttachment: "fixed",
+				}}
 		>
 			<div className="flex flex-1 flex-col md:flex-row w-full">
 				<nav
@@ -50,7 +56,7 @@ export default function Home() {
 				>
 					<section className="w-full flex flex-col items-center space-y-8">
 						<article
-							className="rounded-lg border-4 shadow-pixel p-6 w-full max-w-xl"
+							className="rounded-lg border-4 shadow-pixel p-6 w-full max-w-2xl"
 							aria-label="Welcome Card"
 							style={{
 								background: "var(--surface)",
@@ -105,7 +111,7 @@ export default function Home() {
 							</div>
 						</article>
 						<section
-							className="rounded-lg border-4 shadow-pixel w-full max-w-xl mt-2"
+							className="rounded-lg border-4 shadow-pixel w-full max-w-2xl mt-2"
 							aria-label="Sample post card"
 							style={{
 								background: "var(--surface)",
