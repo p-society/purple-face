@@ -1,23 +1,26 @@
-import React from "react";
+import type React from "react";
 
 type PostButtonProps = {
-    children: React.ReactNode;
-    onClick?: () => void;
+	children: React.ReactNode;
+	onClick?: () => void;
 };
 
 const PostButton: React.FC<PostButtonProps> = ({ children, onClick }) => {
-    return (
-        <button
-            onClick={onClick}
-            className={`px-2 py-1 rounded border-2 pixel-font text-xs transition-all duration-200 ease-out
-                border-[var(--border)] text-[var(--badge)] bg-[var(--bg)]
-                hover:bg-[var(--surface)] hover:text-[var(--primary)] hover:border-[var(--accent)] hover:shadow-pixel-glow hover:-translate-y-0.5
+	return (
+		<button
+			type="button"
+			onClick={onClick}
+			className={`
+                px-3 py-1 rounded border-2 pixel-font text-sm
+                bg-[var(--surface)] border-[var(--border)] text-[var(--text-secondary)]
+                hover:bg-[var(--accent)] hover:text-[var(--bg)] hover:border-[var(--accent)]
                 active:translate-y-0.5 active:shadow-none
+                transition-all duration-200 ease-out
             `}
-        >
-            {children}
-        </button>
-    );
+		>
+			{children}
+		</button>
+	);
 };
 
 export default PostButton;
