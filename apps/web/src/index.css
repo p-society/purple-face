@@ -63,6 +63,7 @@
 	--popover: #262626;
 	--popover-foreground: #f5f5f5;
 	--muted: #3c3c4a;
+	--muted-foreground: #aaaaaa;
 	--destructive: #ef4444;
 	--input: #3c3c4a;
 	--sidebar: #1c1c2a;
@@ -74,5 +75,9 @@
 	--sidebar-border: #3c3c4a;
 	--sidebar-ring: #bca4e2;
 	--background-image: url('/backgrounds/bg-dark.png');
+}
+
+body {
+  @apply transition-colors duration-500;
 }
 
