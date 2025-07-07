@@ -1,32 +1,102 @@
-import { NavLink } from "react-router";
-
-import { ModeToggle } from "./mode-toggle";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { ModeToggle } from "@/components/mode-toggle";
+import navItems from "@/components/nav-items";
+import SidebarItem from "@/components/sidebar-item";
 
 export default function Header() {
-	const links = [{ to: "/", label: "Home" }];
+	const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	return (
-		<div>
-			<div className="flex flex-row items-center justify-between px-2 py-1">
-				<nav className="flex gap-4 text-lg">
-					{links.map(({ to, label }) => {
-						return (
-							<NavLink
-								key={to}
-								to={to}
-								className={({ isActive }) => (isActive ? "font-bold" : "")}
-								end
-							>
-								{label}
-							</NavLink>
-						);
-					})}
-				</nav>
+		<>
+			<header
+				className="flex justify-between items-center p-4 border-b-4"
+				style={{
+					background: "var(--surface)",
+					borderColor: "var(--border)",
+				}}
+			>
+				<div className="flex items-center gap-2">
+					<img src="/logo.png" alt="IIITBuzz Logo" className="h-8 w-8" />
+					<span
+						className="font-bold text-lg pixel-font"
+						style={{ color: "var(--primary)" }}
+					>
+						IIITBuzz
+					</span>
+				</div>
 				<div className="flex items-center gap-2">
 					<ModeToggle />
+					<button
+						type="button"
+						className="md:hidden p-2 rounded border-2 pixel-font"
+						style={{
+							background: "var(--surface)",
+							color: "var(--primary)",
+							borderColor: "var(--primary)",
+						}}
+						aria-label="Toggle Menu"
+						onClick={() => setMobileMenuOpen(true)}
+					>
+						<Menu size={20} />
+					</button>
 				</div>
+			</header>
+
+			{/* Mobile Drawer */}
+			<div
+				className={`fixed inset-y-0 left-0 w-64 z-40 transition-transform duration-300 ease-in-out shadow-pixel
+                ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+				style={{
+					background: "var(--surface)",
+					color: "var(--text-primary)",
+					borderRight: "4px solid var(--border)",
+				}}
+			>
+				<div
+					className="flex justify-between items-center p-4 border-b-4"
+					style={{ borderColor: "var(--border)" }}
+				>
+					<div
+						className="font-bold pixel-font"
+						style={{ color: "var(--primary)" }}
+					>
+						Menu
+					</div>
+					<button
+						type="button"
+						className="p-2 rounded border-2 pixel-font"
+						style={{
+							background: "var(--surface)",
+							color: "var(--primary)",
+							borderColor: "var(--primary)",
+						}}
+						aria-label="Close Menu"
+						onClick={() => setMobileMenuOpen(false)}
+					>
+						<X size={20} />
+					</button>
+				</div>
+				<nav className="flex flex-col gap-2 p-4" aria-label="Mobile Navigation">
+					{navItems.map((item) => (
+						<SidebarItem
+							key={item.label}
+							icon={item.icon}
+							label={item.label}
+							href={item.href}
+							onClick={() => setMobileMenuOpen(false)}
+						/>
+					))}
+				</nav>
 			</div>
-			<hr />
-		</div>
+
+			{isMobileMenuOpen && (
+				<div
+					className="fixed inset-0 z-30 bg-black/50"
+					onClick={() => setMobileMenuOpen(false)}
+					aria-hidden="true"
+				></div>
+			)}
+		</>
 	);
 }
