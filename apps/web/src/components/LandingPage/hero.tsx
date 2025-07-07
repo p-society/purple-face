@@ -33,23 +33,23 @@ const Hero = () => {
 			<div className="container mx-auto px-4 text-center relative z-20">
 				<div className="max-w-4xl mx-auto fade-in-up">
 					<div className="flex justify-center mb-8 space-x-4">
-						<div className="w-16 h-16 neo-brutal-card bg-green-200-20 border-green-500 flex items-center justify-center avatar-float">
+						<div className="w-16 h-16 neo-brutal-card bg-green-200 border-green-500 flex items-center justify-center avatar-float">
 							<img src="/images/avatar1.png" alt="Avatar1" />
 						</div>
 						<div
-							className="w-16 h-16 neo-brutal-card bg-blue-200-20 border-blue-500 flex items-center justify-center avatar-float"
+							className="w-16 h-16 neo-brutal-card bg-blue-200 border-blue-500 flex items-center justify-center avatar-float"
 							style={{ animationDelay: "0.5s" }}
 						>
 							<img src="/images/avatar2.png" alt="Avatar2" />
 						</div>
 						<div
-							className="w-16 h-16 neo-brutal-card bg-yellow-200-20 border-yellow-500 flex items-center justify-center avatar-float"
+							className="w-16 h-16 neo-brutal-card bg-yellow-200 border-yellow-500 flex items-center justify-center avatar-float"
 							style={{ animationDelay: "1s" }}
 						>
 							<img src="/images/avatar3.png" alt="Avatar3" />
 						</div>
 						<div
-							className="w-16 h-16 neo-brutal-card bg-purple-200-20 border-purple-500 flex items-center justify-center avatar-float"
+							className="w-16 h-16 neo-brutal-card bg-purple-200 border-purple-500 flex items-center justify-center avatar-float"
 							style={{ animationDelay: "1.5s" }}
 						>
 							<img src="/images/avatar4.png" alt="Avatar4" />

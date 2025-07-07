@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
+import { Link } from "react-router";
 const FeaturesPage = () => {
 	const featuresPage = [
 		{
@@ -53,31 +53,32 @@ const FeaturesPage = () => {
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-					{featuresPage.map((feature, index) => (
-						<Card
-							key={feature.key} // ✅ Add key here
-							className={`neo-brutal-card ${feature.color} hover:scale-105 transition-transform duration-200 ghibli-feature-card relative overflow-hidden cursor-pointer`}
-							style={{ animationDelay: `${index * 0.2}s` }}
-						>
-							<CardHeader className="text-center">
-								<div
-									className="text-4xl mb-4 avatar-float"
-									style={{ animationDelay: `${index * 0.1}s` }}
-								>
-									{feature.icon}
-								</div>
-								<CardTitle className="pixel-font text-foreground text-lg">
-									{feature.title}
-								</CardTitle>
-							</CardHeader>
-							<CardContent>
-								<p className="text-sm text-muted-foreground text-center">
-									{feature.description}
-								</p>
-							</CardContent>
-						</Card>
-					))}
-				</div>
+                {featuresPage.map((feature, index) => (
+                  <Link to="/comingsoon" key={feature.key}>
+                    <Card
+                      className={`neo-brutal-card ${feature.color} hover:scale-105 transition-transform duration-200 ghibli-feature-card relative overflow-hidden cursor-pointer`}
+                      style={{ animationDelay: `${index * 0.2}s` }}
+                    >
+                      <CardHeader className="text-center">
+                        <div
+                          className="text-4xl mb-4 avatar-float"
+                          style={{ animationDelay: `${index * 0.1}s` }}
+                        >
+                          {feature.icon}
+                        </div>
+                        <CardTitle className="pixel-font text-foreground text-lg">
+                          {feature.title}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-muted-foreground text-center">
+                          {feature.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
 			</div>
 		</section>
 	);
