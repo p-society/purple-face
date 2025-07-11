@@ -19,14 +19,13 @@ export async function authRoutes(fastify: FastifyInstance) {
 
 		const scope = ["openid", "profile", "email"].join(" ");
 
-		const oauthURL =
-			`https://accounts.google.com/o/oauth2/v2/auth` +
-			`?client_id=${clientId}` +
-			`&redirect_uri=${encodeURIComponent(redirectURL)}` +
-			`&response_type=code` +
-			`&scope=${encodeURIComponent(scope)}` +
-			`&access_type=offline` +
-			`&prompt=consent`;
+		const oauthURL = new URL("https://accounts.google.com/o/oauth2/v2/auth");
+		oauthURL.searchParams.append("client_id", clientId);
+		oauthURL.searchParams.append("redirect_uri", redirectURL);
+		oauthURL.searchParams.append("response_type", "code");
+		oauthURL.searchParams.append("scope", scope);
+		oauthURL.searchParams.append("access_type", "offline");
+		oauthURL.searchParams.append("prompt", "consent");
 
 		fastify.log.info("🔗 Redirecting user to Google OAuth:", oauthURL);
 		reply.redirect(oauthURL.toString());
@@ -34,6 +33,16 @@ export async function authRoutes(fastify: FastifyInstance) {
 
 	fastify.get("/google/callback", async (request, reply) => {
 		const { code } = request.query as { code?: string };
+		const clientId = process.env.GOOGLE_CLIENT_ID;
+		const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+		const redirectURL = process.env.GOOGLE_REDIRECT_URI;
+
+		if (!clientId || !clientSecret || !redirectURL) {
+			fastify.log.error("❌ Missing Google OAuth environment variables");
+			return reply.status(500).send({
+				error: "Server misconfiguration: missing Google OAuth keys",
+			});
+		}
 
 		if (!code) {
 			fastify.log.warn("⚠️ No authorization code found in callback URL");
@@ -43,10 +52,6 @@ export async function authRoutes(fastify: FastifyInstance) {
 		fastify.log.info("🎉 Received Google authorization code:", code);
 
 		try {
-			const clientId = process.env.GOOGLE_CLIENT_ID as string;
-			const clientSecret = process.env.GOOGLE_CLIENT_SECRET as string;
-			const redirectURL = process.env.GOOGLE_REDIRECT_URI as string;
-
 			const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
 				method: "POST",
 				headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -97,36 +102,44 @@ export async function authRoutes(fastify: FastifyInstance) {
 					error: "Server misconfiguration: missing JWT_SECRET",
 				});
 			}
+			let userId: string;
+			let redirectPath: string;
 
 			if (user) {
-				const token = jwt.sign({ userId: user.id }, jwtSecret, {
-					expiresIn: "1h",
-				});
-				fastify.log.info("🔑 Existing user JWT:", token);
-				return reply.redirect(`/home?token=${token}`);
+				userId = user.id;
+				redirectPath = "/home";
+				fastify.log.info("✅ Existing user found");
+			} else {
+				const newUserResult = await DrizzleClient.insert(users)
+					.values({
+						id: crypto.randomUUID(),
+						username: null, // Let user set this on the details page
+						email,
+						firstName: "",
+						lastName: "",
+						pronouns: "",
+						bio: "",
+						branch: "",
+						passingOutYear: "",
+						totalPosts: 0,
+					})
+					.returning({ id: users.id });
+
+				if (!newUserResult?.[0]?.id) {
+					fastify.log.error("❌ Failed to create new user or retrieve new user's ID", { newUser: newUserResult });
+					return reply.status(500).send({ error: "Failed to create user" });
+				}
+				
+				userId = newUserResult[0].id;
+				redirectPath = "/user-details";
+				fastify.log.info("🆕 New user created");
 			}
-
-			const newUser = await DrizzleClient.insert(users)
-				.values({
-					id: crypto.randomUUID(),
-					username: name,
-					email,
-					firstName: "",
-					lastName: "",
-					pronouns: "",
-					bio: "",
-					branch: "",
-					passingOutYear: "",
-					totalPosts: 0,
-				})
-				.returning();
-
-			const token = jwt.sign({ userId: newUser[0].id }, jwtSecret, {
+			const token = jwt.sign({ userId }, jwtSecret, {
 				expiresIn: "1h",
 			});
-			fastify.log.info("🆕 New user created, JWT:", token);
 
-			return reply.redirect(`/user-details?token=${token}`);
+			fastify.log.info(`🔑 JWT created. Redirecting to ${redirectPath}`);
+			return reply.redirect(`${redirectPath}?token=${token}`);
 		} catch (err) {
 			fastify.log.error("🔥 Error during Google OAuth:", err);
 			return reply.send({ error: "Something went wrong during Google login" });
