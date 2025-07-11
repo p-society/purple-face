@@ -88,7 +88,7 @@ export async function authRoutes(fastify: FastifyInstance) {
 
 			fastify.log.info("👤 Google user info:", userInfo);
 
-			const { email, name } = userInfo;
+			const { email } = userInfo;
 
 			const user = await DrizzleClient.query.users.findFirst({
 				where: (u, { eq }) => eq(u.email, email),
@@ -126,10 +126,13 @@ export async function authRoutes(fastify: FastifyInstance) {
 					.returning({ id: users.id });
 
 				if (!newUserResult?.[0]?.id) {
-					fastify.log.error("❌ Failed to create new user or retrieve new user's ID", { newUser: newUserResult });
+					fastify.log.error(
+						"❌ Failed to create new user or retrieve new user's ID",
+						{ newUser: newUserResult },
+					);
 					return reply.status(500).send({ error: "Failed to create user" });
 				}
-				
+
 				userId = newUserResult[0].id;
 				redirectPath = "/user-details";
 				fastify.log.info("🆕 New user created");
