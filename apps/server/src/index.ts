@@ -2,6 +2,7 @@ import "dotenv/config";
 import fastifyCors from "@fastify/cors";
 import Fastify from "fastify";
 import { DrizzleClient } from "./db/index.js";
+import { appRouter } from "./routers/index";
 
 const baseCorsConfig = {
 	origin: process.env.CORS_ORIGIN || "",
@@ -16,6 +17,7 @@ const fastify = Fastify({
 });
 
 fastify.register(fastifyCors, baseCorsConfig);
+fastify.register(appRouter);
 
 fastify.get("/", async () => {
 	return "OK";
