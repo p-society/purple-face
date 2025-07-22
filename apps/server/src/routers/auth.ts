@@ -7,17 +7,22 @@ import { users } from "../db/schema/user.schema.js";
 export async function authRoutes(fastify: FastifyInstance) {
 	fastify.get("/google/callback", async (request, reply) => {
 		try {
-			const token = await fastify.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(request);
+			const token =
+				await fastify.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(
+					request,
+				);
 			const idToken = token.token.id_token;
 
-				const userInfoResponse = await fetch(
+			const userInfoResponse = await fetch(
 				`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`,
 			);
 			const userInfo = await userInfoResponse.json();
-			
+
 			if (!userInfoResponse.ok) {
 				fastify.log.error("Failed to fetch user info:", userInfo);
-				return reply.status(400).send({ error: "Failed to fetch user info from Google" });
+				return reply
+					.status(400)
+					.send({ error: "Failed to fetch user info from Google" });
 			}
 
 			fastify.log.info(" Google user info:", userInfo);
@@ -78,7 +83,9 @@ export async function authRoutes(fastify: FastifyInstance) {
 			return reply.redirect(`${redirectPath}?token=${jwtToken}`);
 		} catch (err) {
 			fastify.log.error(" Error during Google OAuth:", err);
-			return reply.status(500).send({ error: "Something went wrong during Google login" });
+			return reply
+				.status(500)
+				.send({ error: "Something went wrong during Google login" });
 		}
 	});
 }
