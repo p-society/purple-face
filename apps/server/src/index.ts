@@ -3,6 +3,7 @@ import fastifyCors from "@fastify/cors";
 import Fastify from "fastify";
 import { DrizzleClient } from "./db/index.js";
 import { appRouter } from "./routers/index";
+import fastifyOauth2 from '@fastify/oauth2';
 
 const baseCorsConfig = {
 	origin: process.env.CORS_ORIGIN || "",
@@ -14,6 +15,20 @@ const baseCorsConfig = {
 
 const fastify = Fastify({
 	logger: true,
+});
+
+fastify.register(fastifyOauth2, {
+  name: 'googleOAuth2',
+  credentials: {
+    client: {
+      id: process.env.GOOGLE_CLIENT_ID!,
+      secret: process.env.GOOGLE_CLIENT_SECRET!,
+    },
+    auth: fastifyOauth2.GOOGLE_CONFIGURATION,
+  },
+  scope: ['openid', 'profile', 'email'],
+  startRedirectPath: '/auth/google',
+  callbackUri: process.env.GOOGLE_REDIRECT_URI!,
 });
 
 fastify.register(fastifyCors, baseCorsConfig);
