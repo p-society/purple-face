@@ -92,43 +92,5 @@ export async function authRoutes(fastify: FastifyInstance) {
 		return reply.send({ message: "Logged out successfully" });
 	});
 
-	fastify.get("/me", { preHandler: authenticateUser }, async (request, reply) => {
-		const userId = (request as any).userId;
-		
-		const user = await DrizzleClient.query.users.findFirst({
-			where: (u, { eq }) => eq(u.id, userId),
-			columns: {
-				id: true,
-				email: true,
-				username: true,
-				firstName: true,
-				lastName: true,
-				pronouns: true,
-				bio: true,
-				branch: true,
-				passingOutYear: true,
-			},
-		});
-
-		if (!user) {
-			return reply.status(404).send({ error: "User not found" });
-		}
-
-		return reply.send({ user });
-	});
 }
 
-async function authenticateUser(request: any, reply: any) {
-	try {
-		const token = request.cookies.auth_token;
-		
-		if (!token) {
-			return reply.status(401).send({ error: "No authentication token provided" });
-		}
-
-		const decoded = jwt.verify(token, env.JWT_SECRET) as { userId: string };
-		request.userId = decoded.userId;
-	} catch (err) {
-		return reply.status(401).send({ error: "Invalid authentication token" });
-	}
-}
