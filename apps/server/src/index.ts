@@ -1,12 +1,14 @@
 import "dotenv/config";
+import fastifyCookie from "@fastify/cookie";
 import fastifyCors from "@fastify/cors";
 import fastifyOauth2 from "@fastify/oauth2";
 import Fastify from "fastify";
 import { DrizzleClient } from "./db/index.js";
+import { env } from "./envSchema.js";
 import { appRouter } from "./routers/index";
 
 const baseCorsConfig = {
-	origin: process.env.CORS_ORIGIN || "",
+	origin: env.CORS_ORIGIN,
 	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 	allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
 	credentials: true,
@@ -17,18 +19,35 @@ const fastify = Fastify({
 	logger: true,
 });
 
+// Register cookie plugin first (required by @fastify/oauth2)
+fastify.register(fastifyCookie, {
+	secret: env.JWT_SECRET, // Use same secret for cookie signing
+	parseOptions: {
+		httpOnly: true,
+		secure: env.NODE_ENV === "production",
+		sameSite: "lax",
+		maxAge: 60 * 60 * 24 * 7, // 7 days
+	},
+});
+
 fastify.register(fastifyOauth2, {
 	name: "googleOAuth2",
 	credentials: {
 		client: {
-			id: process.env.GOOGLE_CLIENT_ID!,
-			secret: process.env.GOOGLE_CLIENT_SECRET!,
+			id: env.GOOGLE_CLIENT_ID,
+			secret: env.GOOGLE_CLIENT_SECRET,
 		},
 		auth: fastifyOauth2.GOOGLE_CONFIGURATION,
 	},
 	scope: ["openid", "profile", "email"],
 	startRedirectPath: "/auth/google",
-	callbackUri: process.env.GOOGLE_REDIRECT_URI!,
+	callbackUri: env.GOOGLE_REDIRECT_URI,
+	// Configure secure cookies for OAuth2 state and PKCE
+	cookie: {
+		secure: env.NODE_ENV === "production",
+		httpOnly: true,
+		sameSite: "lax",
+	},
 });
 
 fastify.register(fastifyCors, baseCorsConfig);
@@ -67,10 +86,10 @@ const shutdown = async () => {
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 
-fastify.listen({ port: 3000 }, (err) => {
+fastify.listen({ port: Number(env.PORT) }, (err) => {
 	if (err) {
 		fastify.log.error(err);
 		process.exit(1);
 	}
-	console.log("Server running on port 3000");
+	console.log(`Server running on port ${env.PORT}`);
 });

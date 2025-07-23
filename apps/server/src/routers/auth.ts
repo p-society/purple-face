@@ -3,6 +3,7 @@ import type { FastifyInstance } from "fastify";
 import jwt from "jsonwebtoken";
 import { DrizzleClient } from "../db/index.js";
 import { users } from "../db/schema/user.schema.js";
+import { env } from "../envSchema.js";
 
 export async function authRoutes(fastify: FastifyInstance) {
 	fastify.get("/google/callback", async (request, reply) => {
@@ -25,42 +26,30 @@ export async function authRoutes(fastify: FastifyInstance) {
 					.send({ error: "Failed to fetch user info from Google" });
 			}
 
-			fastify.log.info(" Google user info:", userInfo);
 			const { email } = userInfo;
-			console.log("👤 Google user info:", userInfo);
 			const user = await DrizzleClient.query.users.findFirst({
 				where: (u, { eq }) => eq(u.email, email),
 			});
-
-			const jwtSecret = process.env.JWT_SECRET;
-			if (!jwtSecret) {
-				fastify.log.error("JWT_SECRET is missing in .env");
-				return reply.status(500).send({
-					error: "Server misconfiguration: missing JWT_SECRET",
-				});
-			}
 
 			let userId: string;
 			let redirectPath: string;
 
 			if (user) {
-				console.log("Existing user found");
 				userId = user.id;
 				redirectPath = "/home";
 				fastify.log.info("Existing user found");
 			} else {
-				console.log("Creating new user");
 				const newUserResult = await DrizzleClient.insert(users)
 					.values({
 						id: crypto.randomUUID(),
 						username: null,
 						email,
-						firstName: "",
-						lastName: "",
-						pronouns: "",
-						bio: "",
-						branch: "",
-						passingOutYear: "",
+						firstName: null,
+						lastName: null,
+						pronouns: null,
+						bio: null,
+						branch: null,
+						passingOutYear: null,
 						totalPosts: 0,
 					})
 					.returning({ id: users.id });
@@ -75,17 +64,71 @@ export async function authRoutes(fastify: FastifyInstance) {
 				fastify.log.info("New user created");
 			}
 
-			const jwtToken = jwt.sign({ userId }, jwtSecret, {
-				expiresIn: "1h",
+			const jwtToken = jwt.sign({ userId }, env.JWT_SECRET, {
+				expiresIn: "7d",
 			});
 
-			fastify.log.info(`JWT created. Redirecting to ${redirectPath}`);
-			return reply.redirect(`${redirectPath}?token=${jwtToken}`);
+			reply.setCookie("auth_token", jwtToken, {
+				httpOnly: true,
+				secure: env.NODE_ENV === "production",
+				sameSite: "lax",
+				maxAge: 60 * 60 * 24 * 7,
+				path: "/",
+			});
+
+			fastify.log.info(`JWT cookie set. Redirecting to ${redirectPath}`);
+			return reply.redirect(redirectPath);
 		} catch (err) {
-			fastify.log.error(" Error during Google OAuth:", err);
+			fastify.log.error("Error during Google OAuth:", err);
 			return reply
 				.status(500)
 				.send({ error: "Something went wrong during Google login" });
 		}
 	});
+
+	fastify.post("/logout", async (request, reply) => {
+		reply.clearCookie("auth_token", { path: "/" });
+		fastify.log.info("User logged out");
+		return reply.send({ message: "Logged out successfully" });
+	});
+
+	fastify.get("/me", { preHandler: authenticateUser }, async (request, reply) => {
+		const userId = (request as any).userId;
+		
+		const user = await DrizzleClient.query.users.findFirst({
+			where: (u, { eq }) => eq(u.id, userId),
+			columns: {
+				id: true,
+				email: true,
+				username: true,
+				firstName: true,
+				lastName: true,
+				pronouns: true,
+				bio: true,
+				branch: true,
+				passingOutYear: true,
+			},
+		});
+
+		if (!user) {
+			return reply.status(404).send({ error: "User not found" });
+		}
+
+		return reply.send({ user });
+	});
+}
+
+async function authenticateUser(request: any, reply: any) {
+	try {
+		const token = request.cookies.auth_token;
+		
+		if (!token) {
+			return reply.status(401).send({ error: "No authentication token provided" });
+		}
+
+		const decoded = jwt.verify(token, env.JWT_SECRET) as { userId: string };
+		request.userId = decoded.userId;
+	} catch (err) {
+		return reply.status(401).send({ error: "Invalid authentication token" });
+	}
 }
